@@ -16,3 +16,7 @@ void httpManager::getMqttCredentials(){
     _mqttCredentials.token = "d7406bde-8100-4af9-b75b-c3e5a811f01d";
     httpManager::_onMqttCredentialsReceivedCallbackMethod(_mqttCredentials);
 }
+
+void httpManager::getMqttCredentialsRecived(){
+
+}

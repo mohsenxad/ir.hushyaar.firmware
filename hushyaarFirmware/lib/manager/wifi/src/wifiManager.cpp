@@ -13,7 +13,6 @@ WiFiManager::WiFiManager(
         Serial.println("Connected To Wifi");
         WiFiManager::_connected = true;
         WiFiManager::_connecting = false;
-        // this->_onWiFiConnectedCallbackMethod();
     }, SYSTEM_EVENT_STA_CONNECTED);
 
     WiFiManager::_wifiProvider.getWIFI().onEvent([&](WiFiEvent_t event, WiFiEventInfo_t info){

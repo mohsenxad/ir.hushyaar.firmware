@@ -2,8 +2,8 @@
 #include <functional>
 
 
-#include "mqttCredentials/mqttCredentials.h"
-#include "wifiCredentials/wifiCredentials.h"
+#include "mqttCredentials.h"
+#include "wifiCredentials.h"
 
 #define  STORAGE_GET_WIFI_CREDENTAILS_METHOD std::function<WifiCredentials()>
 

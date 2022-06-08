@@ -1,5 +1,5 @@
 #include "../provider/wifi/src/wifiProvider.h"
-#include "wifiCredentials/wifiCredentials.h"
+#include "wifiCredentials.h"
 
 #define  STORAGE_GET_WIFI_CREDENTAILS_METHOD std::function<WifiCredentials()>
 #define  STORAGE_GET_WIFI_PASSWORD std::function<String()>
