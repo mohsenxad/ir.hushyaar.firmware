@@ -7,6 +7,10 @@ httpManager::httpManager(HTTP_MQTT_CREDENTIALS_CALL_BACK_METHOD onMqttCredential
 }
 
 void httpManager::getMqttCredentials(){
+    httpManager::getMqttCredentialsRecived();
+}
+
+void httpManager::getMqttCredentialsRecived(){
     MqttCredentials _mqttCredentials;
     _mqttCredentials.host = "mqtt.hushyaar.ir";
     _mqttCredentials.port = 1773;
@@ -15,8 +19,4 @@ void httpManager::getMqttCredentials(){
     _mqttCredentials.password = "fasDFASDlkjhasdfAsdfhkj124";
     _mqttCredentials.token = "d7406bde-8100-4af9-b75b-c3e5a811f01d";
     httpManager::_onMqttCredentialsReceivedCallbackMethod(_mqttCredentials);
-}
-
-void httpManager::getMqttCredentialsRecived(){
-
 }

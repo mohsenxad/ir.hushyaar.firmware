@@ -6,6 +6,9 @@ StorageManager::StorageManager(){
 
     StorageManager::_wifiCredentials.ssid = "xad";
     StorageManager::_wifiCredentials.password = "09122707748";
+
+    // StorageManager::_wifiCredentials.ssid = "koochooloo2";
+    // StorageManager::_wifiCredentials.password = "toopooloo999";
     
 }
 

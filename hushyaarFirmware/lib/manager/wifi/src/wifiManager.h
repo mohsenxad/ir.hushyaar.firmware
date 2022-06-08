@@ -1,5 +1,6 @@
 #include "../provider/wifi/src/wifiProvider.h"
 #include "wifiCredentials.h"
+#include "wifiConnectionError.h"
 
 #define  STORAGE_GET_WIFI_CREDENTAILS_METHOD std::function<WifiCredentials()>
 #define  STORAGE_GET_WIFI_PASSWORD std::function<String()>
@@ -14,6 +15,7 @@ class WiFiManager{
         WIFI_CONNECTED_CALL_BACK_METHOD _onWiFiConnectedCallbackMethod;
         bool _connected;
         bool _connecting;
+        WifiConnectionError _lastConnectionAttempError;
     public:
         WiFiManager();
         WiFiManager(
