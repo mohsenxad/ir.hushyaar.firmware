@@ -1,6 +1,3 @@
-
-
-
 #include <Arduino.h>
 #include <functional>
 #include <FreeRTOS.h>
@@ -12,31 +9,19 @@
 #include "../lib/manager/log/src/logManager.h"
 #include "../lib/manager/storage/src/storageManager.h"
 #include "../lib/manager/wifi/src/wifiManager.h"
+#include "../lib/manager/http/src/httpManager.h"
 
 // how to remove this from main.cpp and move to providers
 #include <AsyncTCP.h>
 #include "ESPAsyncWebServer.h"
-#include <WiFi.h>
-
-// #define  STORAGE_GET_WIFI_SSID std::function<String()>
-// #define  STORAGE_GET_WIFI_PASSWORD std::function<String()>
-// #define  WIFI_CONNECTED_CALL_BACK_METHOD std::function<void(WiFiEvent_t event, WiFiEventInfo_t info)>
-
 
 
 LogManager _logManager;
 StorageManager _storageManager;
 
-String getWifiSsid(){
-  return _storageManager.getWifiSsid();
-}
 
 
-String getWifiPassword(){
-  return _storageManager.getWifiPassword();
-}
-
-WiFiManager _wifiManager(getWifiSsid, getWifiPassword);
+WiFiManager _wifiManager(_storageManager.getWifiCredentialsMethod());
 // // void setupCustomerWebServer(){
 // //   DeviceConfigManager _deviceConfigManager;  
 // //   _deviceConfigManager.start();
@@ -60,10 +45,23 @@ WiFiManager _wifiManager(getWifiSsid, getWifiPassword);
 
 
 
+
+
+void MqttCredentilasReceived(MqttCredentials _mqttCredentials){
+  //_logManager.debug(_mqttCredentials);
+  _logManager.debug("Main:: Mqtt Credentilas Received in Call Back");
+  _storageManager.setMqttCredentilas(_mqttCredentials);
+}
+
+
+httpManager _httpManager(MqttCredentilasReceived);
+
+
 void WiFiStationConnected()
 {
   _logManager.debug("Main:: WiFi connected in Call Back");
   _logManager.wifiConnected();
+  _httpManager.getMqttCredentials();
 }
 
 void connectToWifi(){

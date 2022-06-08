@@ -1,29 +1,26 @@
 #include "storageManager.h"
 
 StorageManager::StorageManager(){
-    //StorageManager::setWifiSsid("xad");
-    //StorageManager::setWifiPassword("09122707748");
-    StorageManager::setWifiSsid("koochooloo2");
-    StorageManager::setWifiPassword("toopooloo999");
+    // StorageManager::_wifiCredentials.set("xad","09122707748");
+    // StorageManager::_wifiCredentials.set("koochooloo2","toopooloo999");
+
+    StorageManager::_wifiCredentials.ssid = "xad";
+    StorageManager::_wifiCredentials.password = "09122707748";
+    
 }
 
-String StorageManager::getWifiSsid(){
-    return StorageManager::_wifiSsid;
+WifiCredentials StorageManager::getWifiCredentials(){
+   return StorageManager::_wifiCredentials; 
 }
 
-void StorageManager::setWifiSsid(String wifiSsid){
-    StorageManager::_wifiSsid = wifiSsid;
+STORAGE_GET_WIFI_CREDENTAILS_METHOD StorageManager::getWifiCredentialsMethod(){
+    return [&]() -> WifiCredentials
+    {
+        return StorageManager::getWifiCredentials();
+    };
 }
 
-String StorageManager::getWifiPassword(){
-    return StorageManager::_wifiPassword;
-}
 
-void StorageManager::setWifiPassword(String wifiPassword){
-    StorageManager::_wifiPassword = wifiPassword;
-}
-
-void StorageManager::setWifiCredentials(String wifiSsid , String wifiPassword){
-    StorageManager::setWifiSsid(wifiSsid);
-    StorageManager::setWifiPassword(wifiPassword);
+void StorageManager::setMqttCredentilas(MqttCredentials mqttCredentials){
+    StorageManager::_mqttCredentials = mqttCredentials;
 }

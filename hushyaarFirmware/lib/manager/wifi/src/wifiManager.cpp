@@ -5,18 +5,24 @@ WiFiManager::WiFiManager(){
 }
 
 WiFiManager::WiFiManager(
-    STORAGE_GET_WIFI_SSID getWifiSsidMethod,
-    STORAGE_GET_WIFI_PASSWORD getWifiPasswodMethod
+    STORAGE_GET_WIFI_CREDENTAILS_METHOD getWifiCredentialsMethod
 ){
-    WiFiManager::_getWifiSsidMethod = getWifiSsidMethod;
-    WiFiManager::_getWifiPasswodMethod = getWifiPasswodMethod;
+    WiFiManager::_getWifiCredentialsMethod = getWifiCredentialsMethod;
 
     WiFiManager::_wifiProvider.getWIFI().onEvent([&](WiFiEvent_t event, WiFiEventInfo_t info){
         Serial.println("Connected To Wifi");
         WiFiManager::_connected = true;
         WiFiManager::_connecting = false;
-        this->_onWiFiConnectedCallbackMethod();
+        // this->_onWiFiConnectedCallbackMethod();
     }, SYSTEM_EVENT_STA_CONNECTED);
+
+    WiFiManager::_wifiProvider.getWIFI().onEvent([&](WiFiEvent_t event, WiFiEventInfo_t info){
+        Serial.println("Got IP");
+        Serial.println(_wifiProvider.getWIFI().localIP());
+        Serial.println(_wifiProvider.getWIFI().macAddress());
+      
+        this->_onWiFiConnectedCallbackMethod();
+    }, SYSTEM_EVENT_STA_GOT_IP);
 
     WiFiManager::_wifiProvider.getWIFI().onEvent([&](WiFiEvent_t event, WiFiEventInfo_t info){
         Serial.println("Disconnecd From Wifi");
@@ -29,8 +35,8 @@ WiFiManager::WiFiManager(
 }
 
 void WiFiManager::connect(){
-    String wifiSsid = WiFiManager::_getWifiSsidMethod();
-    String wifiPassword = WiFiManager::_getWifiPasswodMethod();
+    String wifiSsid = WiFiManager::_getWifiCredentialsMethod().ssid;
+    String wifiPassword = WiFiManager::_getWifiCredentialsMethod().password;
  
 
     WiFiManager::_connecting = true;

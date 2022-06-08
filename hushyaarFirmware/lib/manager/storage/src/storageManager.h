@@ -1,14 +1,21 @@
 #include <WString.h>
+#include <functional>
+
+
+#include "mqttCredentials/mqttCredentials.h"
+#include "wifiCredentials/wifiCredentials.h"
+
+#define  STORAGE_GET_WIFI_CREDENTAILS_METHOD std::function<WifiCredentials()>
 
 class StorageManager{
     private:
-        String _wifiSsid;
-        String _wifiPassword;
+        WifiCredentials _wifiCredentials;
+        MqttCredentials _mqttCredentials;
+        
     public:
         StorageManager();
-        String getWifiSsid();
-        void setWifiSsid(String wifiSsid);
-        String getWifiPassword();
-        void setWifiPassword(String wifiPassword);
-        void setWifiCredentials(String wifiSsid , String wifiPassword);
+        WifiCredentials getWifiCredentials();
+        STORAGE_GET_WIFI_CREDENTAILS_METHOD getWifiCredentialsMethod();
+        void setMqttCredentilas(MqttCredentials mqttCredentials);
+        
 };
