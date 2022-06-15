@@ -1,6 +1,5 @@
-#pragma once
 #include <functional>
-#include "mqttCredentials.h"
+#include "../model/mqttCredentials.h"
 
 #define  HTTP_MQTT_CREDENTIALS_CALL_BACK_METHOD std::function<void(MqttCredentials)>
 

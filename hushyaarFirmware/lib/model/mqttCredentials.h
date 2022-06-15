@@ -3,15 +3,12 @@
 
 #include "WString.h"
 
-struct MqttCredentials
-{
-    /* data */
+struct MqttCredentials{
     String host;
     int port;
     String protocol;
     String username;
     String password;
     String token;
-
 };
 #endif

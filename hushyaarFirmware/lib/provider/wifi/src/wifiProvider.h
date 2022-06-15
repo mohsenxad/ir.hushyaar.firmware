@@ -1,3 +1,6 @@
+#ifndef WIFIPROVIDER_H
+#define WIFIPROVIDER_H
+
 #include <WiFi.h>
 
 class WifiProvider{
@@ -7,3 +10,4 @@ class WifiProvider{
         WifiProvider();
         WiFiClass getWIFI();
 };
+#endif

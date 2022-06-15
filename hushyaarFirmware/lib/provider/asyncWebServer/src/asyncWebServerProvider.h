@@ -1,3 +1,6 @@
+#ifndef ASYNCWEBSERVERPROVIDER_H
+#define ASYNCWEBSERVERPROVIDER_H
+
 #include "ESPAsyncWebServer.h"
 #include "../../wifi/src/wifiProvider.h"
 
@@ -10,3 +13,5 @@ class AsyncWebServerProvider{
         void setRoute(const char* uri, WebRequestMethodComposite method, ArRequestHandlerFunction onRequest);
         void start();
 };
+
+#endif

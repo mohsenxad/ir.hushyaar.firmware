@@ -1,4 +1,4 @@
-#include "../../../provider/bluetooth/src/bluetoothProvider.h"
+#include "../../lib/provider/bluetooth/src/bluetoothProvider.h"
 
 
 class BluetoothManager{
