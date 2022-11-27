@@ -43,6 +43,7 @@
         "regex": "cpp",
         "utility": "cpp",
         "typeinfo": "cpp",
-        "esp32-hal.h": "c"
+        "esp32-hal.h": "c",
+        "string": "cpp"
     }
 }

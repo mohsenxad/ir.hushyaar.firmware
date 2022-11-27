@@ -10,16 +10,17 @@ void aiThinkerCameraProvider::setSetResultionCallBackMethods(
     aiThinkerCameraProvider::_onSetResolutionSuccessCallbackMethod = onSetResolutionSuccessCallbackMethod;
     aiThinkerCameraProvider::_onSetResolutionFailCallbackMethod = onSetResolutionFailCallbackMethod;
     aiThinkerCameraProvider::_onCaptureSucccessCallbacckMethod = onCaptureSucccessCallbacckMethod;
-
     // while (!aiThinkerCameraProvider::_isInit){
-    //     vTaskDelay(10000);
-    //     Serial.println("try To Init");
-    //     aiThinkerCameraProvider::init();
+        // vTaskDelay(10000);
+        // Serial.println("try To Init");
+        // aiThinkerCameraProvider::init();
     // }
+    Serial.print("aiThinkerCameraProvider : Here");
 }
 
 void aiThinkerCameraProvider::setResultion(CameraQuality cameraQuality){
     framesize_t quality;
+    Serial.print("aiThinkerCameraProvider : Now Here");
 
     switch (cameraQuality){
         case CAMERA_QUALITY_VERY_LOW:  quality = FRAMESIZE_QQVGA;   break;
@@ -51,48 +52,49 @@ void aiThinkerCameraProvider::setResultion(CameraQuality cameraQuality){
 }
 
 void aiThinkerCameraProvider::init(){
+    Serial.print("aiThinkerCameraProvider : init -> Now Here"); 
     sensor_t* sensor = esp_camera_sensor_get();
     if (sensor == nullptr){
          Serial.println("sensor found");
     }
-    camera_config_t config;
-    config.ledc_channel = LEDC_CHANNEL_0;
-    config.ledc_timer = LEDC_TIMER_0;
-    config.pin_d0 = Y2_GPIO_NUM;
-    config.pin_d1 = Y3_GPIO_NUM;
-    config.pin_d2 = Y4_GPIO_NUM;
-    config.pin_d3 = Y5_GPIO_NUM;
-    config.pin_d4 = Y6_GPIO_NUM;
-    config.pin_d5 = Y7_GPIO_NUM;
-    config.pin_d6 = Y8_GPIO_NUM;
-    config.pin_d7 = Y9_GPIO_NUM;
-    config.pin_xclk = XCLK_GPIO_NUM;
-    config.pin_pclk = PCLK_GPIO_NUM;
-    config.pin_vsync = VSYNC_GPIO_NUM;
-    config.pin_href = HREF_GPIO_NUM;
-    config.pin_sscb_sda = SIOD_GPIO_NUM;
-    config.pin_sscb_scl = SIOC_GPIO_NUM;
-    config.pin_pwdn = PWDN_GPIO_NUM;
-    config.pin_reset = RESET_GPIO_NUM;
-    config.xclk_freq_hz = 15000000;
-    config.pixel_format = PIXFORMAT_JPEG;
+    aiThinkerCameraProvider::config.ledc_channel = LEDC_CHANNEL_0;
+    aiThinkerCameraProvider::config.ledc_timer = LEDC_TIMER_0;
+    aiThinkerCameraProvider::config.pin_d0 = Y2_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_d1 = Y3_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_d2 = Y4_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_d3 = Y5_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_d4 = Y6_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_d5 = Y7_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_d6 = Y8_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_d7 = Y9_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_xclk = XCLK_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_pclk = PCLK_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_vsync = VSYNC_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_href = HREF_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_sscb_sda = SIOD_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_sscb_scl = SIOC_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_pwdn = PWDN_GPIO_NUM;
+    aiThinkerCameraProvider::config.pin_reset = RESET_GPIO_NUM;
+    aiThinkerCameraProvider::config.xclk_freq_hz = 15000000;
+    aiThinkerCameraProvider::config.pixel_format = PIXFORMAT_JPEG;
 
     
     if(psramFound()){
         Serial.println("PSRAM found");
-        config.frame_size = FRAMESIZE_XGA;
-        config.jpeg_quality = 15;  //0-63 lower number means higher quality
-        config.fb_count = 2;
+        aiThinkerCameraProvider::config.frame_size = FRAMESIZE_XGA;
+        aiThinkerCameraProvider::config.jpeg_quality = 15;  //0-63 lower number means higher quality
+        aiThinkerCameraProvider::config.fb_count = 2;
     }else {
         Serial.println("PSRAM Not found");
-        config.frame_size = FRAMESIZE_CIF;
-        config.jpeg_quality = 12;  //0-63 lower number means higher quality
-        config.fb_count = 1;
+        aiThinkerCameraProvider::config.frame_size = FRAMESIZE_CIF;
+        aiThinkerCameraProvider::config.jpeg_quality = 12;  //0-63 lower number means higher quality
+        aiThinkerCameraProvider::config.fb_count = 1;
     }
 
     Serial.println("Cam Config befor esp_camera_init");
     try
     {
+        Serial.printf("Camera init fb_count");
         esp_err_t err = esp_camera_init(&config);
         if (err != ESP_OK) {
             Serial.printf("Camera init failed with error 0x%x", err);

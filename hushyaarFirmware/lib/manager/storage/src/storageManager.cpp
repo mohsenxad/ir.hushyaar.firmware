@@ -17,7 +17,7 @@ StorageManager::StorageManager(){
     // StorageManager::_wifiCredentials.password = "toopooloo999";
 
     StorageManager::_haveWiFiCredentials = false;
-
+    
     StorageManager::_isAvailable = true;
 
     

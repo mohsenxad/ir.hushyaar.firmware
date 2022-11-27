@@ -13,6 +13,8 @@
 
 #include "./process/setupFactoryWebservice/setupFactoryWebserviceProcess.h"
 #include "./process/setupWifiWebservice/setupWifiWebserviceProcess.h"
+#include "./process/boot/bootProcees.h"
+#include "./process/Armed/armedProcess.h"
 
 // how to remove this from main.cpp and move to providers
 #include <AsyncTCP.h>
@@ -21,7 +23,6 @@
 
 LogManager _logManager;
 StorageManager _storageManager;
-
 
 
 WiFiManager _wifiManager(_storageManager.getWifiCredentialsMethod());
@@ -100,30 +101,29 @@ CameraManager _cameraManager(CameraSetResolutionSuccess, CameraSetResolutionFail
 
 
 
-void boot(){
+static void boot(){
   _cameraManager.setResultion(CAMERA_QUALITY_GOOD);
 }
 
 void setup() {
   Serial.begin(115200);
-  Serial.println(ESP.getHeapSize());
-  Serial.println(ESP.getFreeHeap());
-  //Serial.println(ESP.getPsramSize());
-  Serial.println(ESP.getFreePsram());
+  
   delay(3000);
   // put your setup code here, to run once:
   //setupCustomerWebServer();
   //setupWiFiConfigWebServer();
   // startBLE();
-  
-  boot();
-  
+  BootProcess _bootProcess;
+  _bootProcess.Boot();
+  //boot();
+  delay(3000);
+  ArmedProcess _armedProcess;
+  _armedProcess.Start();
 }
 
 
 
 void loop(){
-  //delay(2000);
   //_cameraManager.capture();
 }
 

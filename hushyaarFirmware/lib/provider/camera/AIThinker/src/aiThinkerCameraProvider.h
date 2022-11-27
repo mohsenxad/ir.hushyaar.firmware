@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <functional>
+#include <string> 
 #include "pins_arduino.h"
 #include "esp_camera.h"
 #include "../../../../model/cameraQuality.h"
@@ -29,6 +30,7 @@
 
 class aiThinkerCameraProvider{
     private:
+        camera_config_t config;
         bool _isInit  = false;
         void init();
         CAMERA_SET_RESOLUTION_SUCCESS_CALL_BACK_METHOD _onSetResolutionSuccessCallbackMethod;

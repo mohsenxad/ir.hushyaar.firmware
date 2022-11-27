@@ -17,9 +17,11 @@ CameraManager::CameraManager
         CameraManager::_onSetResolutionFailCallbackMethod,
         CameraManager::_onCaptureSucccessCallbacckMethod
     );
+    Serial.print("Here");
 }
 
 void CameraManager::setResultion(CameraQuality cameraQuality){
+    Serial.print("CameraManager : Now Here");
     CameraManager::_aiThinkerCameraProvider.setResultion(cameraQuality);
 }
 

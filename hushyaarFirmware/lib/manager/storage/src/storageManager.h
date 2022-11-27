@@ -6,6 +6,7 @@
 #include "../model/wifiCredentials.h"
 #include "../model/factoryCredentials.h"
 
+#define  EEPROM_SIZE 120
 #define  STORAGE_GET_WIFI_CREDENTAILS_METHOD std::function<WifiCredentials()>
 #define  STORAGE_GET_FACTORY_CREDENTAILS_METHOD std::function<FactoryCredentials()>
 
